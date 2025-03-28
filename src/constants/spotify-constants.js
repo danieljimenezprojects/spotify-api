@@ -9,6 +9,9 @@ export const SCOPES = [
 	'playlist-modify-public',
 	'playlist-modify-private',
 	'user-read-email',
+	'user-read-private',
+	'user-library-read',
+	'user-library-modify',
 ].join('%20')
 export const STATUS = {
 	INIT: '',
