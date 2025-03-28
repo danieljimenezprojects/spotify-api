@@ -109,7 +109,9 @@ function App() {
 							justifyContent: 'center',
 						}}
 					>
-						<div style={{ display: 'flex', width: '100vw' }}>
+						<div
+							style={{ display: 'flex', maxWidth: '100vw', flexWrap: 'wrap' }}
+						>
 							<SearchResults
 								setSongUri={setSongUri}
 								setPlaylist={setPlaylist}

@@ -67,6 +67,9 @@
 
 /* Estilos responsivos */
 @media (max-width: 640px) {
+  .form {
+    margin-bottom: 16px;
+  }
   .searchInput {
     padding: 12px 16px;
     font-size: 14px;
@@ -76,47 +79,4 @@
     width: 40px;
     height: 40px;
   }
-}
-/* Radio button styling as toggle buttons */
-.radioGroup {
-  display: flex;
-  gap: 8px;
-  margin-right: 1rem;
-}
-
-.radioOption {
-  position: relative;
-}
-
-.radioInput {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.radioLabel {
-  display: inline-block;
-  padding: 6px 12px;
-  font-size: 14px;
-  border-radius: 20px;
-  background-color: rgb(172, 216, 248);
-  color: rgba(255, 255, 255, 0.7);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  user-select: none;
-}
-
-.radioInput:checked + .radioLabel {
-  background-color: rgb(84, 179, 247);
-  color: white;
-}
-
-.radioInput:focus + .radioLabel {
-  box-shadow: 0 0 0 2px rgb(84, 179, 247);
-}
-
-/* Hover effect */
-.radioLabel:hover {
-  background-color: rgb(84, 179, 247);
 }

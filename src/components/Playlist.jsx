@@ -82,7 +82,6 @@ function Playlist({ playlist, setPlaylist, songUri, setSongUri, token }) {
 				style={{
 					display: 'flex',
 					flexDirection: 'row',
-					flexWrap: 'wrap',
 					gap: '1rem',
 				}}
 			>
@@ -97,12 +96,14 @@ function Playlist({ playlist, setPlaylist, songUri, setSongUri, token }) {
 					)
 				})}
 			</div>
-			<button
-				onClick={() => openModal()}
-				className={styles.spotifyButton}
-			>
-				Save Playlist to Spotify
-			</button>
+			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+				<button
+					onClick={() => openModal()}
+					className={styles.spotifyButton}
+				>
+					Save Playlist to Spotify
+				</button>
+			</div>
 			<Dialog
 				handleSubmit={handleSubmit}
 				playlist={playlist}
