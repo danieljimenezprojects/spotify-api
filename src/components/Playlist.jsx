@@ -82,6 +82,7 @@ function Playlist({ playlist, setPlaylist, songUri, setSongUri, token }) {
 				style={{
 					display: 'flex',
 					flexDirection: 'row',
+					flexWrap: 'wrap',
 					gap: '1rem',
 				}}
 			>
