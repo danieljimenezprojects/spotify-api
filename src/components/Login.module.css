@@ -1,0 +1,40 @@
+.a{
+  background-color: #1db954;
+  color: #f8f8f8;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  font-size: 1rem;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  width: 180px;
+  height: 20px;
+}
+
+.a:hover{
+  background-color: #15883d;
+  transition: all 0.2s ease;
+}
+
+.a svg{
+  margin-right: 1rem;
+  visibility: hidden;
+  transform: translateX(-15px);
+  transition: all 0.2s ease;
+}
+
+.a:hover svg{
+  visibility: visible;
+  transform: translateX(0px);
+}
+
+.a span{
+  transition: all 0.2s ease;
+  transform: translate(-20px);
+}
+
+.a:hover span{
+  transform: translate(0px);
+}

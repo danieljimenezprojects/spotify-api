@@ -1,0 +1,20 @@
+.button{
+  border: none;
+  background-color: transparent;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.article{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  background-color: rgb(145, 205, 248);
+  padding: 1rem;
+  border-radius: 16px;
+  border: 1px solid white;
+}

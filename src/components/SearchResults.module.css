@@ -1,0 +1,19 @@
+.section{
+  flex: 1;
+  padding: 1rem 4rem;
+  margin: 2rem;
+  background-color: rgb(172, 216, 248);
+  border-radius: 16px;
+}
+.h2{
+  color: white;
+  font-size: 2rem;
+}
+.button{
+  border: none;
+  background-color: transparent;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
