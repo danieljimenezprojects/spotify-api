@@ -1,7 +1,6 @@
-'use client'
-
 import { useEffect, useState } from 'react'
 import getToken from '../services/getToken'
+import refreshToken from '../services/refreshToken'
 
 export function useToken() {
 	// Initialize with a loading state
@@ -14,9 +13,9 @@ export function useToken() {
 	useEffect(() => {
 		// First check if we already have a token in localStorage
 		const storedToken = localStorage.getItem('spotifyToken')
+		const storedRefreshToken = localStorage.getItem('spotifyRefreshToken')
 
 		if (storedToken) {
-			// Use the stored token immediately
 			setTokenState({
 				token: storedToken,
 				loading: false,
@@ -30,24 +29,20 @@ export function useToken() {
 		const code = urlParams.get('code')
 
 		if (code) {
-			// Set loading state while we fetch the token
 			setTokenState((prev) => ({ ...prev, loading: true }))
 
 			getToken(code)
-				.then((accessToken) => {
-					// Don't validate the token here, just use what we get
-					// Store token in localStorage
+				.then(({ accessToken, refreshToken }) => {
 					if (accessToken) {
 						localStorage.setItem('spotifyToken', accessToken)
+						localStorage.setItem('spotifyRefreshToken', refreshToken)
 
-						// Update state with the new token
 						setTokenState({
 							token: accessToken,
 							loading: false,
 							error: null,
 						})
 					} else {
-						// Handle empty token case
 						setTokenState({
 							token: null,
 							loading: false,
@@ -55,7 +50,6 @@ export function useToken() {
 						})
 					}
 
-					// Clean the URL after getting the token
 					window.history.replaceState(
 						{},
 						document.title,
@@ -64,21 +58,33 @@ export function useToken() {
 				})
 				.catch((error) => {
 					console.error('Error getting token:', error)
-					setTokenState({
-						token: null,
-						loading: false,
-						error: error.message,
-					})
+					setTokenState({ token: null, loading: false, error: error.message })
+				})
+		} else if (storedRefreshToken) {
+			// Attempt to refresh token if we have a refresh token
+			setTokenState((prev) => ({ ...prev, loading: true }))
+			refreshToken(storedRefreshToken)
+				.then(({ accessToken, refreshToken }) => {
+					if (accessToken) {
+						localStorage.setItem('spotifyToken', accessToken)
+						localStorage.setItem('spotifyRefreshToken', refreshToken)
+						setTokenState({ token: accessToken, loading: false, error: null })
+					} else {
+						setTokenState({
+							token: null,
+							loading: false,
+							error: 'Failed to refresh token',
+						})
+					}
+				})
+				.catch((error) => {
+					console.error('Error refreshing token:', error)
+					setTokenState({ token: null, loading: false, error: error.message })
 				})
 		} else {
-			// No code and no stored token, we're just not logged in
-			setTokenState({
-				token: null,
-				loading: false,
-				error: null,
-			})
+			setTokenState({ token: null, loading: false, error: null })
 		}
-	}, []) // Empty dependency array - only run once on mount
+	}, [])
 
 	return {
 		token: tokenState.token,
